@@ -1,3 +1,20 @@
+/**
+ * Process a payment transaction.
+ *
+ * @param {number} amount - The amount to be paid.
+ * @param {string} cardNumber - The card number used for payment.
+ * @returns {object} - An object containing the payment transaction details.
+ *                    If the payment is successful, the object will have the following properties:
+ *                      - success: true
+ *                      - data: {
+ *                          - transactionId: string
+ *                          - amount: number
+ *                          - date: Date
+ *                        }
+ *                    If the payment fails due to an invalid card number, the object will have the following properties:
+ *                      - success: false
+ *                      - error: string
+ */
 export const processPayment = (amount, cardNumber) => {
   if (!validCardNumbers.includes(cardNumber)) {
     return { success: false, error: 'Invalid card number' }
@@ -13,6 +30,10 @@ export const processPayment = (amount, cardNumber) => {
   }
 }
 
+/**
+ * Generates a 16-digit transaction ID by joining 4 random 4-digit numbers.
+ * @returns {string} The generated transaction ID.
+ */
 const generateTransactionId = () => {
   // generate 16 digit transaction id joined from 4 random 4 digit numbers
   const transactionId = Array.from({ length: 4 }, () =>
